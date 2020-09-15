@@ -16,14 +16,14 @@ const markIncomplete = id => ({
     }
 });
 
-export const requestComplete = id => dispatch => {
-    stubCompleteRequest(id)
-        .then(() => dispatch(markComplete(id)))
-        .catch(console.error);
-};
-
-export const requestIncomplete = id => dispatch => {
-    stubIncompleteRequest(id)
-        .then(() => dispatch(markIncomplete(id)))
-        .catch(console.error);
+export const requestToggle = id => (dispatch, getState) => {
+    if (getState().toDos.completedIds.includes(id)) {
+        stubIncompleteRequest(id)
+            .then(() => dispatch(markIncomplete(id)))
+            .catch(console.error);
+    } else {
+        stubCompleteRequest(id)
+            .then(() => dispatch(markComplete(id)))
+            .catch(console.error);
+    }
 };

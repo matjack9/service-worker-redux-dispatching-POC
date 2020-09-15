@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { requestComplete, requestIncomplete } from './redux/toDosActions';
+import { requestToggle } from './redux/toDosActions';
 
 const ToDoItem = ({ id }) => {
     const dispatch = useDispatch();
@@ -12,7 +12,7 @@ const ToDoItem = ({ id }) => {
     const isComplete = completedIds.includes(id);
 
     const toggle = () => {
-        isComplete ? dispatch(requestIncomplete(id)) : dispatch(requestComplete(id));
+        dispatch(requestToggle(id));
     };
 
     return (
