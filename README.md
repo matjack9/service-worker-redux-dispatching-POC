@@ -1,4 +1,4 @@
-# Multiple Client Redux Action Dispatching Service Worker
+# Service Worker Redux Dispatching POC
 
 This is a POC for clients sending redux actions as messages to other clients via a service worker.
 
