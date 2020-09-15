@@ -2,6 +2,8 @@
 
 This is a POC for clients sending redux actions as messages to other clients via a service worker.
 
+![](recording.gif)
+
 ## Concerns
 
 - Need to dedupe response handling (the client making the request will receive both the response and also the message)
