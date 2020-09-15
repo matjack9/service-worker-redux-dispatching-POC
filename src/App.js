@@ -1,10 +1,17 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { applyMiddleware, createStore, compose } from 'redux';
+import thunk from 'redux-thunk';
 import rootReducer from './redux/rootReducer';
 import ToDoList from './ToDoList';
 
-const store = createStore(rootReducer);
+const middlewares = [thunk];
+
+const middlewareEnhancer = applyMiddleware(...middlewares);
+const enhancers = [middlewareEnhancer];
+const composedEnhancers = compose(...enhancers);
+
+const store = createStore(rootReducer, undefined, composedEnhancers);
 
 const App = () => (
   <Provider store={store}>
