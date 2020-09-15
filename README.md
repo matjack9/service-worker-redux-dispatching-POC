@@ -1,3 +1,14 @@
+# Multiple Client Redux Action Dispatching Service Worker
+
+This is a POC for clients sending redux actions as messages to other clients via a service worker.
+
+## Concerns
+
+- Need to dedupe response handling (the client making the request will receive both the response and also the message)
+- Is a middleware a suitable option for dispatching specific actions across clients via the sw?
+- How to express that a message is an action? A flag?
+- How to organize added complexity of this?
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

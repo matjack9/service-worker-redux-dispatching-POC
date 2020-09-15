@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import createStore from './redux/configureStore';
 import ToDoList from './ToDoList';
 
-const store = createStore();
+export const store = createStore();
 
 const App = () => (
   <Provider store={store}>

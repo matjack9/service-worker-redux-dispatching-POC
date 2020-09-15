@@ -1,16 +1,17 @@
-const stubCompleteRequest = id => Promise.resolve(true);
+import { serviceWorker } from '../serviceWorker';
 
-const stubIncompleteRequest = id => Promise.resolve(true);
+export const SET_COMPLETE = 'SET_COMPLETE';
+export const SET_INCOMPLETE = 'SET_INCOMPLETE';
 
 const markComplete = id => ({
-    type: 'SET_COMPLETE',
+    type: SET_COMPLETE,
     payload: {
         id
     }
 });
 
 const markIncomplete = id => ({
-    type: 'SET_INCOMPLETE',
+    type: SET_INCOMPLETE,
     payload: {
         id
     }
@@ -18,12 +19,24 @@ const markIncomplete = id => ({
 
 export const requestToggle = id => (dispatch, getState) => {
     if (getState().toDos.completedIds.includes(id)) {
-        stubIncompleteRequest(id)
-            .then(() => dispatch(markIncomplete(id)))
+        fetch('thisRequestIsStubbedByTheSW.com')
+            .then(() => {
+                const action = markIncomplete(id);
+                dispatch(action);
+                if (serviceWorker) {
+                    serviceWorker.postMessage(action);
+                }
+            })
             .catch(console.error);
     } else {
-        stubCompleteRequest(id)
-            .then(() => dispatch(markComplete(id)))
+        fetch('thisRequestIsStubbedByTheSW.com')
+            .then(() => {
+                const action = markComplete(id);
+                dispatch(action);
+                if (serviceWorker) {
+                    serviceWorker.postMessage(action);
+                }
+            })
             .catch(console.error);
     }
 };
